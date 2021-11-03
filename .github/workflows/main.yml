@@ -1,1 +1,22 @@
-DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWizb-YL8DAHShfmwkw5N2BOrFvW0_mCCXqVHEI1sAunxf-8X3J8BLHQFurYmlR3Kw" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
+name: Ubuntu 20.04
+
+on: 
+  workflow_dispatch:
+    inputs:
+      chrome_access_code:
+        description: https://remotedesktop.google.com/headless
+        required: true
+      pin:
+        description: Enter your 6 numbers pin
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run settting file
+        run: |
+          sudo bash ./linux_config/setting.sh
+          ${{ github.event.inputs.chrome_access_code }} -pin=${{ github.event.inputs.pin }}
+      - name: Ubuntu ready to go 
+        run: sleep 1d
