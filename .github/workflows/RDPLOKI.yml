@@ -1,4 +1,4 @@
-name: windowslinux
+name: amazonRDP
 
 on: workflow_dispatch
 
